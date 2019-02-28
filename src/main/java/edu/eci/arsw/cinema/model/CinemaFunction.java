@@ -26,10 +26,10 @@ public class CinemaFunction {
 	public CinemaFunction() {
 	}
 
-	public CinemaFunction(Movie movie, String date) {
+	public CinemaFunction(Movie movie, String wholeDate) {
 		this.movie = movie;
-		this.date = date.split(" ")[0];
-		this.hour = date.split(" ")[1];
+		this.date = wholeDate.split(" ")[0];
+		this.hour = wholeDate.split(" ")[1];
 		numSeats=7*12;
 		for (int i = 0; i < 7; i++) {
 			List<Boolean> row = new ArrayList<>(Arrays.asList(new Boolean[12]));
@@ -55,6 +55,13 @@ public class CinemaFunction {
 
 	public int getNumSeats() {
 		return numSeats;
+	}
+	
+	public void setFunction(CinemaFunction function) {
+		this.seats = function.getSeats();
+		this.date = function.getDate();
+		this.hour = function.getHour();
+		this.numSeats = function.getNumSeats();
 	}
 
 	public void setNumSeats(int numSeats) {

@@ -67,5 +67,13 @@ public class CinemaServices {
 		return cps.getFunctionsbyCinemaAndHourAndMovie(cinema, wholeDate, movieName);
 
 	}
+	
+	public void addCinemaFuction (String name, CinemaFunction function) throws CinemaException {
+		cps.addCinemaFuction(name, function);
+	}
+	
+	public void updateCinemaFuction (String name, CinemaFunction function) throws CinemaException{
+		cps.updateCinemaFuction(name, function);
+	}
 
 }

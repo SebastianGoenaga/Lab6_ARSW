@@ -111,6 +111,20 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
 	}
 
 	@Override
+	public void addCinemaFuction (String name, CinemaFunction function) throws CinemaException{
+		Cinema cinema = cinemas.get(name);
+		cinema.addFuction(function);
+	}
+	
+	@Override
+	public void updateCinemaFuction (String name, CinemaFunction function) throws CinemaException{
+		Cinema cinema = cinemas.get(name);
+		if (!cinema.updateFunction(function)) {
+			throw new CinemaException("The given function to update does not exit");
+		}
+	}
+	
+	@Override
 	public Cinema getCinemaByName(String name) throws CinemaPersistenceException {
 		return cinemas.get(name);
 	}

@@ -26,6 +26,10 @@ public class Cinema {
 	public String getName() {
 		return name;
 	}
+	
+	public void addFuction (CinemaFunction function) {
+		functions.add(function);
+	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -37,5 +41,19 @@ public class Cinema {
 
 	public void setSchedule(List<CinemaFunction> functions) {
 		this.functions = functions;
+	}
+
+	public boolean updateFunction(CinemaFunction function) {
+		
+		for (CinemaFunction cinemaFunction : functions) {
+			System.out.println(cinemaFunction.getMovie().getName());
+			System.out.println(function.getMovie().getName());
+			if (cinemaFunction.getMovie().getName().equals(function.getMovie().getName())) {
+				cinemaFunction.setFunction(function);
+				return true;
+			}
+		}
+		return false;
+		
 	}
 }

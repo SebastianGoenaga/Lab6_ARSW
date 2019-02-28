@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,12 +91,29 @@ public class CinemaAPIController {
 	    }        
 	}
 	@PostMapping("{name}")
-	public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Cinema cinema){
+	public ResponseEntity<?> putFunction(@PathVariable String name, @RequestBody CinemaFunction function){
 	    try {
 	    	
 	        //registrar dato
+	    	
+	    	
+	    	cinemaServices.addCinemaFuction(name, function);
+	    	
 	        return new ResponseEntity<>(HttpStatus.CREATED);
-	    } catch (XXException ex) {
+	    } catch (CinemaException ex) {
+	        Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+	        return new ResponseEntity<>("Error bla bla bla",HttpStatus.FORBIDDEN);            
+	    }        
+
+	}
+	@PutMapping("{name}")
+	public ResponseEntity<?> updateFunction(@PathVariable String name, @RequestBody CinemaFunction function){
+	    try {	    	
+	    	
+	    	cinemaServices.updateCinemaFuction(name, function);
+	    	
+	        return new ResponseEntity<>(HttpStatus.CREATED);
+	    } catch (CinemaException ex) {
 	        Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
 	        return new ResponseEntity<>("Error bla bla bla",HttpStatus.FORBIDDEN);            
 	    }        

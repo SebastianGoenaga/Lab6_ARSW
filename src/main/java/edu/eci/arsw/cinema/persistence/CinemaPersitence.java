@@ -71,6 +71,10 @@ public interface CinemaPersitence {
 	public CinemaFunction getFunctionsbyCinemaAndHourAndMovie(String cinema, String wholeDate, String movieName)
 			throws CinemaException;
 
+	void addCinemaFuction(String name, CinemaFunction function) throws CinemaException;
+
+	void updateCinemaFuction(String name, CinemaFunction function) throws CinemaException;
+
 	
 
 }
