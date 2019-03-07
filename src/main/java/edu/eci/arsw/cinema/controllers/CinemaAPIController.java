@@ -52,11 +52,11 @@ public class CinemaAPIController {
 	}
 
 	@GetMapping("{name}")
-	public ResponseEntity<?> getByName(@PathVariable String name) {
+	public ResponseEntity<?> getByName(@PathVariable String name) throws CinemaPersistenceException {
 		try {
 
-			ArrayList<CinemaFunction> data = (ArrayList<CinemaFunction>) cinemaServices.getCinemaByName(name)
-					.getFunctions();
+			Cinema c = cinemaServices.getCinemaByName(name);
+			ArrayList<CinemaFunction> data = (ArrayList<CinemaFunction>) c.getFunctions();
 			return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
 
 		} catch (CinemaPersistenceException ex) {
@@ -68,11 +68,11 @@ public class CinemaAPIController {
 	@GetMapping("{name}/{date}")
 	public ResponseEntity<?> getByDate(@PathVariable String name, @PathVariable String date) {
 		try {
-			
+
 			ArrayList<CinemaFunction> data = (ArrayList<CinemaFunction>) cinemaServices
 					.getFunctionsbyCinemaAndDate(name, date);
 			return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
-			
+
 		} catch (CinemaException ex) {
 			Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
 			return new ResponseEntity<>("No se encontró el recurso solicitado", HttpStatus.NOT_FOUND);
@@ -86,7 +86,7 @@ public class CinemaAPIController {
 
 			CinemaFunction data = cinemaServices.getFunctionsbyCinemaAndHourAndMovie(name, date, moviename);
 			return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
-			
+
 		} catch (CinemaException ex) {
 			Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
 			return new ResponseEntity<>("No se encontró el recurso solicitado", HttpStatus.NOT_FOUND);
@@ -94,14 +94,12 @@ public class CinemaAPIController {
 	}
 
 	@PostMapping("{name}")
-	public ResponseEntity<?> putFunction(@PathVariable String name, @RequestBody CinemaFunction function) {
+	public ResponseEntity<?> postFunction(@PathVariable String name, @RequestBody CinemaFunction function) {
 
-			cinemaServices.addCinemaFuction(name, function);
+		cinemaServices.addCinemaFuction(name, function);
 
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-
-	
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
 
 	@PutMapping("{name}")
 	public ResponseEntity<?> updateFunction(@PathVariable String name, @RequestBody CinemaFunction function) {

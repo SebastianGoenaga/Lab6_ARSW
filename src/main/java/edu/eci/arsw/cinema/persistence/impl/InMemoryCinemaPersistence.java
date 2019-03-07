@@ -84,19 +84,21 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
 	@Override
 	public CinemaFunction getFunctionsbyCinemaAndHourAndMovie(String cinema, String wholeDate, String movieName) throws CinemaException {
 		Cinema cine = cinemas.get(cinema);
-		
-		for (CinemaFunction function : cine.getFunctions()) {
-			if (function.getDate().equals(wholeDate.split(" ")[0])) {
-				if (function.getHour().equals(wholeDate.split(" ")[1])) {
-					if (function.getMovie().getName().equals(movieName)) {
-						return function;
+		if (cine != null) {
+			for (CinemaFunction function : cine.getFunctions()) {
+				if (function.getDate().equals(wholeDate.split(" ")[0])) {
+					if (function.getHour().equals(wholeDate.split(" ")[1])) {
+						if (function.getMovie().getName().equals(movieName)) {
+							return function;
+						}
 					}
-				}
-				
+					
 
+				}
 			}
 		}
-		return null;
+		
+		throw new CinemaException("The given function to update does not exit");
 
 	}
 
@@ -124,8 +126,12 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
 	}
 	
 	@Override
-	public Cinema getCinemaByName(String name) throws CinemaPersistenceException {
-		return cinemas.get(name);
+	public Cinema getCinemaByName(String name) throws CinemaException {
+		Cinema c;
+		if ((c = cinemas.get(name)) == null) {
+			throw new CinemaException("The given function to update does not exit");
+		}
+			return c;
 	}
 	
 	//To get map of cinemas

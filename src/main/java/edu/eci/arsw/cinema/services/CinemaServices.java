@@ -43,7 +43,11 @@ public class CinemaServices {
 	 * @throws CinemaException
 	 */
 	public Cinema getCinemaByName(String name) throws CinemaPersistenceException {
-		return cps.getCinemaByName(name);
+		try {
+			return cps.getCinemaByName(name);
+		} catch (CinemaException  e) {
+			throw new CinemaPersistenceException("The given name does not exit");
+		}
 
 	}
 
@@ -64,7 +68,12 @@ public class CinemaServices {
 	
 	
 	public CinemaFunction getFunctionsbyCinemaAndHourAndMovie(String cinema, String wholeDate, String movieName) throws CinemaException {
-		return cps.getFunctionsbyCinemaAndHourAndMovie(cinema, wholeDate, movieName);
+		try {
+			return cps.getFunctionsbyCinemaAndHourAndMovie(cinema, wholeDate, movieName);
+		} catch (CinemaException e) {
+			throw new CinemaException("The given name does not exit");
+		}
+		
 
 	}
 	

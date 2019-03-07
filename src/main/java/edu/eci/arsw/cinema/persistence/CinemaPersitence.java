@@ -63,8 +63,9 @@ public interface CinemaPersitence {
 	 * @return Cinema of the given name
 	 * @throws CinemaPersistenceException
 	 *             if there is no such cinema
+	 * @throws CinemaException 
 	 */
-	public Cinema getCinemaByName(String name) throws CinemaPersistenceException;
+	public Cinema getCinemaByName(String name) throws CinemaException;
 
 	public Set<Cinema> getAllCinemas() throws CinemaPersistenceException;
 
