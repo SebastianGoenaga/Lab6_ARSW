@@ -30,7 +30,6 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
 	private final Map<String, Cinema> cinemas = new HashMap<>();
 
 	public InMemoryCinemaPersistence() {
-		// load stub data
 		String functionDate = "2018-12-18 15:30";
 		List<CinemaFunction> functions = new ArrayList<>();
 		CinemaFunction funct1 = new CinemaFunction(new Movie("SuperHeroes Movie", "Action"), functionDate);
@@ -111,7 +110,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
 	}
 
 	@Override
-	public void addCinemaFuction (String name, CinemaFunction function) throws CinemaException{
+	public void addCinemaFuction (String name, CinemaFunction function) {
 		Cinema cinema = cinemas.get(name);
 		cinema.addFuction(function);
 	}

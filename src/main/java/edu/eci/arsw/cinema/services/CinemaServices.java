@@ -68,7 +68,7 @@ public class CinemaServices {
 
 	}
 	
-	public void addCinemaFuction (String name, CinemaFunction function) throws CinemaException {
+	public void addCinemaFuction (String name, CinemaFunction function)  {
 		cps.addCinemaFuction(name, function);
 	}
 	

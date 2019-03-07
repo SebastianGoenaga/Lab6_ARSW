@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Cinema {
 	private String name;
-	private List<CinemaFunction> functions;
+	private volatile List<CinemaFunction> functions;
 
 	public Cinema() {
 	}
@@ -27,8 +27,10 @@ public class Cinema {
 		return name;
 	}
 	
-	public void addFuction (CinemaFunction function) {
-		functions.add(function);
+	public synchronized void addFuction (CinemaFunction function) {
+		
+			functions.add(function);
+		
 	}
 
 	public void setName(String name) {
@@ -39,17 +41,14 @@ public class Cinema {
 		return this.functions;
 	}
 
-	public void setSchedule(List<CinemaFunction> functions) {
-		this.functions = functions;
-	}
-
 	public boolean updateFunction(CinemaFunction function) {
 		
 		for (CinemaFunction cinemaFunction : functions) {
-			System.out.println(cinemaFunction.getMovie().getName());
-			System.out.println(function.getMovie().getName());
+			//Se actualiza la primera funcion que concuerde con el nombre.
 			if (cinemaFunction.getMovie().getName().equals(function.getMovie().getName())) {
-				cinemaFunction.setFunction(function);
+				synchronized (functions) {
+					cinemaFunction.setFunction(function);
+				}
 				return true;
 			}
 		}

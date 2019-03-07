@@ -57,7 +57,7 @@ public class CinemaFunction {
 		return numSeats;
 	}
 	
-	public void setFunction(CinemaFunction function) {
+	public synchronized void setFunction(CinemaFunction function) {
 		this.seats = function.getSeats();
 		this.date = function.getDate();
 		this.hour = function.getHour();
